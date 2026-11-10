@@ -4,7 +4,7 @@ Thank you for contributing to this FastAPI template. This guide describes the lo
 
 ## Prerequisites
 
-- Python 3.13, 3.14, or 3.15
+- Python 3.13
 - Git
 
 ## Local setup
