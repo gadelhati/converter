@@ -227,7 +227,7 @@ def rtf_bytes_to_lines(data: bytes) -> list[list[tuple[str, Fmt]]]:
 
 
 def rtf_bytes_to_text(data: bytes) -> str:
-    return "\n".join("".join(c for c, _ in l) for l in rtf_bytes_to_lines(data))
+    return "\n".join("".join(char for char, _ in line) for line in rtf_bytes_to_lines(data))
 
 
 _TAGS = (("strong", 0), ("em", 1), ("sup", 2), ("sub", 3), ("s", 4))
@@ -261,7 +261,10 @@ def _line_html(chars: list[tuple[str, Fmt]], plain: str, links: bool) -> str:
         if t and u:
             href = u.group(1).strip()
             label = t.group(1).strip() or href
-            a = f'<a href="{html.escape(href)}" target="_blank">{_chars_html(chars[t.start(1) : t.end(1)]) or html.escape(label)}</a>'
+            link_content = _chars_html(chars[t.start(1) : t.end(1)])
+            link_content = link_content or html.escape(label)
+
+            a = f'<a href="{html.escape(href)}" target="_blank">{link_content}</a>'
             spans = sorted([(t.start(), t.end(), a), (u.start(), u.end(), "")])
             out, pos = [], 0
             for s, e, rep in spans:
@@ -281,7 +284,7 @@ def _prepare(line: list[tuple[str, Fmt]]):
     for m in _MARKER_RE.finditer(plain):
         for k in range(m.start(), m.end()):
             keep[k] = False
-    chars = [c for c, k in zip(line, keep) if k]
+    chars = [char for char, should_keep in zip(line, keep, strict=True) if should_keep]
     chars = [(" " if c == "\u00a0" else c, f) for c, f in chars]
     while chars and chars[0][0].isspace():
         chars.pop(0)
@@ -309,7 +312,7 @@ class Documento:
 def parse(lines, revogado: bool = False) -> Documento:
     """lines: texto puro (str) ou parágrafos vindos de rtf_bytes_to_lines."""
     if isinstance(lines, str):
-        lines = [[(c, (False,) * 5) for c in l] for l in lines.split("\n")]
+        lines = [[(char, (False,) * 5) for char in text_line] for text_line in lines.split("\n")]
     doc = Documento(revogado=revogado)
     secao = "inicio"
     pendentes: set[str] = set()
