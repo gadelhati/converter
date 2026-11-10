@@ -1,4 +1,3 @@
-
 from pathlib import Path
 
 from fastapi import (
@@ -74,9 +73,5 @@ async def convert_many(
     return StreamingResponse(
         archive,
         media_type="application/zip",
-        headers={
-            "Content-Disposition": (
-                'attachment; filename="portarias_html.zip"'
-            )
-        },
+        headers={"Content-Disposition": ('attachment; filename="portarias_html.zip"')},
     )

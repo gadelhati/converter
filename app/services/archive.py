@@ -1,4 +1,3 @@
-
 import io
 import zipfile
 
@@ -27,7 +26,6 @@ def create_archive(
         "w",
         zipfile.ZIP_DEFLATED,
     ) as archive:
-
         for filename, html in documents:
             archive.writestr(filename, html)
 

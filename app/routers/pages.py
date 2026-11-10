@@ -1,4 +1,3 @@
-
 from pathlib import Path
 
 from fastapi import APIRouter
@@ -12,6 +11,4 @@ TEMPLATES_DIR = APP_DIR / "templates"
 
 @router.get("/", response_class=HTMLResponse)
 def index() -> str:
-    return (TEMPLATES_DIR / "index.html").read_text(
-        encoding="utf-8"
-    )
+    return (TEMPLATES_DIR / "index.html").read_text(encoding="utf-8")
