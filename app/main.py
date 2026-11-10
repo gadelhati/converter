@@ -1,12 +1,11 @@
-import uvicorn
 from pathlib import Path
 
+import uvicorn
 from fastapi import FastAPI
 from fastapi.staticfiles import StaticFiles
 
 from app.config import settings
 from app.routers import conversion, health, pages
-
 
 APP_DIR = Path(__file__).resolve().parent
 
