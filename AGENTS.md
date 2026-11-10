@@ -2,7 +2,7 @@
 
 ## Runtime and dependencies
 
-- Support Python versions `>=3.13,<3.16`; use Python 3.13 locally unless a task requires another supported version.
+- Support Python versions `>=3.9,<3.16`; use Python 3.9 locally unless a task requires another supported version.
 - Declare production dependencies in `pyproject.toml` with compatible upper bounds.
 - Install development tools with `python -m pip install -e ".[dev]"`.
 - Store configuration in `app/config.py` using `pydantic-settings`; use the `UVICORN_` environment-variable prefix and do not commit `.env` files.
@@ -17,7 +17,7 @@
 
 - Add or update pytest tests in `tests/` for every behavior change, including HTTP status codes and response payloads for endpoint changes.
 - Ruff configuration in `pyproject.toml` is authoritative. Run `python -m ruff check .` and `python -m ruff format --check .`.
-- Run `python -m pytest -v` after code changes. The CI workflow runs linting, formatting, and tests for Python 3.13 through 3.15.
+- Run `python -m pytest -v` after code changes. The CI workflow runs linting, formatting, and tests for Python 3.9 through 3.15.
 
 ## Documentation
 

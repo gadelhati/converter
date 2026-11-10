@@ -15,7 +15,7 @@ Reusable Python application template built with FastAPI.
 
 ## Tech Stack
 
-![Python](https://img.shields.io/badge/Python-3.13%2B-blue.svg)
+![Python](https://img.shields.io/badge/Python-3.9%2B-blue.svg)
 ![FastAPI](https://img.shields.io/badge/FastAPI-0.115-009688?logo=fastapi)
 
 ## Endpoints
@@ -35,14 +35,14 @@ cp .env.example .env
 
 ## Development
 
-This project requires Python 3.13 or later.
+This project requires Python 3.9 or later.
 
 ```bash
 # create virtual environment
 # Windows PowerShell
-py -3.13 -m venv .venv
+py -3.9 -m venv .venv
 # Linux
-python3.13 -m venv .venv
+python3.9 -m venv .venv
 
 # activate virtual environment (*)
 # Windows PowerShell
