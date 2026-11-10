@@ -43,6 +43,8 @@ python -m pip download -r requirements.txt --dest wheelhouse --platform manylinu
 unzip -o -q ${DOMAIN}.zip -d /opt/
 unzip -o -q wheelhouse.zip -d /opt/{DOMAIN}/
 python -m pip install --no-index --find-links=wheelhouse -r requirements.txt
+python -m pip check
+python -m uvicorn --version
 ```
 
 #### Commum process
