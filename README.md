@@ -37,6 +37,15 @@ cp .env.example .env
 
 This project requires Python 3.13 or later.
 
+#### Internal process due to web restrictions
+```bash
+python -m pip download -r requirements.txt --dest wheelhouse --platform manylinux2014_x86_64 --platform manylinux_2_28_x86_64 --python-version 313 --implementation cp --abi cp313 --only-binary=:all:
+unzip -o -q ${DOMAIN}.zip -d /opt/
+unzip -o -q wheelhouse.zip -d /opt/{DOMAIN}/
+python -m pip install --no-index --find-links=wheelhouse -r requirements.txt
+```
+
+#### Commum process
 ```bash
 # create virtual environment
 # Windows PowerShell
