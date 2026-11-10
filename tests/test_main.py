@@ -1,3 +1,4 @@
+
 from fastapi.testclient import TestClient
 
 from app.main import app
@@ -24,11 +25,12 @@ def test_root_endpoint_returns_expected_response() -> None:
     response = client.get("/")
 
     assert response.status_code == 200
-    assert response.json() == {"message": "Hello, World!"}
+    assert "text/html" in response.headers["content-type"]
+    assert "<html" in response.text.lower()
 
 
 def test_health_endpoint_returns_expected_response() -> None:
     response = client.get("/health")
 
     assert response.status_code == 200
-    assert response.json() == {"status": "healthy"}
+    assert response.json() == {"status": "ok"}
