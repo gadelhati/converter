@@ -46,3 +46,6 @@ select = [
     "PT",       # pytest best practices
     "SIM",      # code simplifications
 ]
+ignore = [
+    "B008",     # FastAPI-specific configuration
+]
