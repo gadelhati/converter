@@ -1,14 +1,30 @@
+
 import uvicorn
+from pathlib import Path
+
 from fastapi import FastAPI
+from fastapi.staticfiles import StaticFiles
 
 from app.config import settings
-from app.routers.base import router as base_router
+from app.routers import conversion, health, pages
+
+
+APP_DIR = Path(__file__).resolve().parent
 
 app = FastAPI(
-    title="Python Template",
+    title="Conversor de RTF para HTML",
     version="1.0.0",
 )
-app.include_router(base_router)
+
+app.mount(
+    "/static",
+    StaticFiles(directory=APP_DIR / "static"),
+    name="static",
+)
+
+app.include_router(pages.router)
+app.include_router(health.router)
+app.include_router(conversion.router)
 
 
 if __name__ == "__main__":
